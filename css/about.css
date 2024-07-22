@@ -1,0 +1,92 @@
+/* style.css */
+body {
+    background-color: #fff;
+    background-image: linear-gradient(#e7e7e7 3px, transparent 3px), 
+                      linear-gradient(90deg, #e7e7e7 3px, transparent 3px);
+    background-size: 150px 150px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    animation: gridAnimation 60s linear infinite;
+}
+
+@keyframes gridAnimation {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 70% 100%;
+    }
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+img {
+    width: 300px; /* ここで幅を設定 */
+    height: auto; /* 高さは自動で調整 */
+    margin-top: -1040px;
+    display: block;
+}
+
+header {
+    position: relative; /* デフォルトの相対位置に戻す */
+    margin-top: -1400px; /* ナビゲーションバーを少し上に持っていく */
+    margin-left: -190px;
+    padding: 0; /* 上下のパディングをリセット */
+}
+
+nav {
+    display: flex; /* フレックスボックスを使用 */
+    flex-direction: column; /* 縦方向に並べる */
+    align-items: center; /* 中央揃え */
+    margin: 0;
+    padding: 0;
+    list-style: none; /* デフォルトのリストスタイルを削除 */
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin: -20px 0; /* アイテム間の垂直間隔を設定 */
+}
+
+nav a {
+    text-decoration: underline;
+    color: rgb(0, 0, 255); /* テキストの色を設定 */
+    font-size: 16px; /* フォントサイズを設定 */
+    line-height: 2; /* 行間を調整 */
+    display: block; /* リンクをブロック要素として表示 */
+    padding: 10px; /* 内側のスペースを追加 */
+    text-align: right;
+    transition: color 0.3s ease; /* カラーの変化にアニメーションを追加 */
+}
+
+/* マウスオーバー時のスタイル */
+nav a:hover {
+    color: #ff2aca; /* マウスオーバー時のテキストカラー */
+}
+
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px; /* 動画の間に隙間を追加 */
+    width: 100vmin; /* ビューポートの幅と高さの最小値を基準にする */
+    height: 100vmin;
+    margin-top: 40px; /* ページの上部にスペースを追加 */
+    margin-left: 20px;
+    margin-bottom: 1100px;
+}
+
+.content {
+    /* 他のコンテンツのスタイルをここに追加 */
+}
