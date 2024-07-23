@@ -179,7 +179,6 @@ nav a:hover {
         background: #fff;
         z-index: 1000;
         padding: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 少しのシャドウを追加 */
     }
 
     #nav-menu ul {
