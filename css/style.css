@@ -158,6 +158,49 @@ video {
     /* 他のコンテンツのスタイルをここに追加 */
 }
 
+/* モーダルウィンドウのスタイル */
+.modal {
+    display: none; /* 初期状態では非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000; /* 他のコンテンツの上に表示 */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    position: relative;
+    width: 80%;
+    max-width: 1000px; /* モーダルの最大幅を設定 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 60vh; /* 高さをビューポートの60%に設定 */
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #000;
+    font-size: 2rem; /* フォントサイズを調整 */
+    cursor: pointer;
+    transition: color 0.3s ease; /* 色の変更にアニメーションを追加 */
+}
+
+.modal-close:hover {
+    color: rgba(0, 0, 0, 0.6); /* マウスオーバー時に色を薄くする */
+}
+
 /* メディアクエリを使用して、スマートフォン向けのスタイルを追加 */
 @media screen and (max-width: 768px) {
     body {
@@ -234,5 +277,35 @@ video {
 
     .video-overlay .small-text {
         font-size: 0.7rem; /* 小さなテキストのサイズを小さく */
+    }
+
+    /* メニューバーのレスポンシブ対応 */
+    #nav-menu {
+        display: block; /* スマートフォンで表示する */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        z-index: 1000;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 少しのシャドウを追加 */
+    }
+
+    #nav-menu ul {
+        display: flex; /* フレックスボックスを使用 */
+        flex-direction: column; /* 縦方向に並べる */
+        align-items: center; /* 中央揃え */
+        padding: 0;
+    }
+
+    #nav-menu li {
+        margin: 10px 0; /* アイテム間の間隔を調整 */
+    }
+
+    #nav-menu a {
+        font-size: 18px; /* フォントサイズを調整 */
+        padding: 10px; /* パディングを調整 */
+        text-align: center; /* テキストを中央揃え */
     }
 }
