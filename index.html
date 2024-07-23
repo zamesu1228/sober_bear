@@ -83,6 +83,26 @@
         .modal-close:hover {
         color: rgba(255, 255, 255, 0.6); /* マウスオーバー時に色を薄くする */
     }
+
+            /* レスポンシブ対応のスタイル */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 90%;
+                max-width: 100%;
+                height: 30%; /* 高さを調整 */
+            }
+
+            .modal-content iframe {
+                height: 100%; /* 高さを調整 */
+            }
+
+            .modal-close {
+                position: absolute;
+                top: -280px;
+                right: -18px;
+                font-size: 4em; /* モバイル用にサイズを小さく */
+            }
+        }
     </style>
 </head>
 
@@ -190,4 +210,3 @@
     </script>
 </body>
 </html>
-
