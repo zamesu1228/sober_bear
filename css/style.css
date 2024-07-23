@@ -125,7 +125,7 @@ nav a:hover {
 .video-overlay h3 {
     margin: 0;
     font-size: 5.5rem; /* タイトルのフォントサイズを調整 */
-    font-family: "Bergen Sans", sans-serif;
+    font-family: "Bergen Sans", sans-serif bold;
     font-weight: 600;
     font-style: normal;
     text-align: left; /* テキストを左寄せ */
@@ -136,7 +136,7 @@ nav a:hover {
 
 .video-overlay .small-text {
     font-size: 0.8rem; /* 小さなテキストのサイズ */
-    font-family: "Bergen Sans", sans-serif;
+    font-family: "Bergen Sans", sans-serif bold;
     font-weight: 600;
     font-style: normal;
     margin-top: 5px; /* 主なテキストとのスペース */
