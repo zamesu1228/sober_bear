@@ -47,7 +47,7 @@
             font-size: 2em; /* 小さなテキストのサイズ */
             margin-top: 5px; /* 主なテキストとのスペース */
         }
-        
+
         /* モーダルのスタイル */
         .modal {
             display: none; /* 初期状態では非表示 */
@@ -81,10 +81,10 @@
         }
 
         .modal-close:hover {
-        color: rgba(255, 255, 255, 0.6); /* マウスオーバー時に色を薄くする */
-    }
+            color: rgba(255, 255, 255, 0.6); /* マウスオーバー時に色を薄くする */
+        }
 
-            /* レスポンシブ対応のスタイル */
+        /* レスポンシブ対応のスタイル */
         @media (max-width: 768px) {
             .modal-content {
                 width: 90%;
@@ -103,14 +103,63 @@
                 font-size: 4em; /* モバイル用にサイズを小さく */
             }
         }
+
+        /* メニューバーのスタイル */
+        #nav-menu {
+            display: none; /* 初期状態では非表示 */
+            position: fixed; /* 固定位置にする */
+            top: 250px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0);
+            z-index: 1000; /* 他のコンテンツの上に表示 */
+            padding: 10px;
+        }
+
+        #nav-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #nav-menu li {
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        #nav-menu a {
+            text-decoration: underline;
+            color: rgb(0, 0, 255);
+            font-size: 16px;
+            display: block;
+        }
+
+        #nav-menu a:hover {
+            color: #ff2aca; /* マウスオーバー時のテキストカラー */
+        }
     </style>
 </head>
 
-<div class="logo">
-    <img src="img/logo.gif" alt="GIF">
-</div>
-
 <body>
+    <div class="logo" id="logo">
+        <img src="img/logo.gif" alt="GIF">
+    </div>
+
+    <!-- メニューバー -->
+    <div id="nav-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html">Discography</a></li>
+            <li><a href="index.html">Other Works</a></li>
+            <li><a href="mailto:soberbear1228@gmail.com">Contact</a></li>
+            <li><a href="https://x.com/zamesu" target="_blank">X</a></li>
+            <li><a href="https://www.instagram.com/zamesu1228/" target="_blank">Instagram</a></li>
+            <li><a href="https://www.youtube.com/@soberbear4914" target="_blank">YouTube</a></li>
+            <li><a href="https://soundcloud.com/yourprofile" target="_blank">SoundCloud</a></li>
+        </ul>
+    </div>
+
     <header>
         <nav>
             <ul>
@@ -166,11 +215,10 @@
             <div class="video-wrapper" data-title="かたち" data-youtube-url="https://www.youtube.com/embed/LuDDKh7_GVM">
                 <video src="img/katati.mp4" autoplay loop muted playsinline></video>
                 <div class="video-overlay">
-                    <span class="small-text">2023</span>
                     <h3>かたち</h3>
                 </div>
             </div>
-            <div class="video-wrapper" data-title="DTM in Japan Winter 2022" data-youtube-url="https://www.youtube.com/embed/JPrE0hlCeEg">
+            <div class="video-wrapper" data-title="JULY" data-youtube-url="https://www.youtube.com/embed/R28rk8a7yR0">
                 <video src="img/pasta.mp4" autoplay loop muted playsinline></video>
                 <div class="video-overlay">
                     <h3>DTM in Japan Winter 2022</h3>
@@ -179,15 +227,31 @@
         </div>
     </div>
 
-    <!-- モーダルウィンドウ -->
+    <!-- モーダル -->
     <div id="videoModal" class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="videoIframe" src="" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
+        // ロゴをクリックしたときにメニューバーを表示・非表示にするスクリプト
+        document.getElementById('logo').addEventListener('click', () => {
+            if (window.innerWidth <= 768) { // レスポンシブ対応時のみ有効
+                const navMenu = document.getElementById('nav-menu');
+                const videoContainer = document.querySelector('.video-container');
+                if (navMenu.style.display === 'block') {
+                    navMenu.style.display = 'none';
+                    videoContainer.style.display = 'flex'; // 動画を再表示
+                } else {
+                    navMenu.style.display = 'block';
+                    videoContainer.style.display = 'none'; // 動画を非表示
+                }
+            }
+        });
+
+        // モーダルのスクリプト
         document.querySelectorAll('.video-wrapper').forEach(wrapper => {
             wrapper.addEventListener('click', () => {
                 const url = wrapper.getAttribute('data-youtube-url');
