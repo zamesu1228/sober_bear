@@ -69,11 +69,13 @@
         .modal-content iframe {
             width: 100%;
             height: 576px;
+            margin-top: 100px;
+            margin-left: 420px;
         }
         .modal-close {
             position: absolute;
-            top: -180px;
-            right: -400px;
+            top: -30px;
+            right: -850px;
             color: #fff;
             font-size: 6em;
             cursor: pointer;
@@ -87,25 +89,27 @@
         /* レスポンシブ対応のスタイル */
         @media (max-width: 768px) {
             .modal-content {
-                width: 90%;
+                width: 100%;
                 max-width: 100%;
                 height: 30%; /* 高さを調整 */
             }
 
             .modal-content iframe {
                 height: 100%; /* 高さを調整 */
+                margin-top: 270px;
+                margin-left: 0;
             }
 
             .modal-close {
                 position: absolute;
-                top: -70px;
-                right: -10px;
+                top: 220px;
+                right: 10px;
                 font-size: 4em; /* モバイル用にサイズを小さく */
             }
+
             .video-overlay h3 {
-            margin: 0;
-            font-size: 3.5em; /* 主なテキストのサイズ */
-        }
+                font-size: 3.5em; /* 主なテキストのサイズ */
+            }
         }
 
         /* メニューバーのスタイル */
@@ -144,7 +148,7 @@
     </style>
 </head>
 
-<body>
+<body style="display: none;">
     <div class="logo" id="logo">
         <img src="img/logo.gif" alt="GIF">
     </div>
@@ -232,49 +236,72 @@
         </div>
     </div>
 
-    <!-- モーダル -->
-    <div id="videoModal" class="modal">
+    <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <iframe id="videoIframe" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <span class="modal-close">×</span>
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // ロゴをクリックしたときにメニューバーを表示・非表示にするスクリプト
-        document.getElementById('logo').addEventListener('click', () => {
-            if (window.innerWidth <= 768) { // レスポンシブ対応時のみ有効
-                const navMenu = document.getElementById('nav-menu');
-                const videoContainer = document.querySelector('.video-container');
-                if (navMenu.style.display === 'block') {
-                    navMenu.style.display = 'none';
-                    videoContainer.style.display = 'flex'; // 動画を再表示
+        $(document).ready(function() {
+            // ページフェードイン
+            $('body').fadeIn(400);
+
+            // ページ遷移時のフェードアニメーション
+            $('a').click(function(e) {
+                e.preventDefault();
+                var href = $(this).attr('href');
+                $('body').fadeOut(400, function() {
+                    window.location.href = href;
+                });
+            });
+
+            // モーダル表示の処理
+            $('.video-wrapper').on('click', function() {
+                var videoUrl = $(this).data('youtube-url');
+                $('#modal iframe').attr('src', videoUrl);
+                $('#modal').fadeIn();
+            });
+
+            // モーダルクローズの処理
+            $('.modal-close, #modal').on('click', function() {
+                $('#modal').fadeOut(function() {
+                    $('#modal iframe').attr('src', '');
+                });
+            });
+
+  // メニュー表示の処理
+            function toggleMenu() {
+                const navMenu = $('#nav-menu');
+                const videoContainer = $('.video-container');
+                if (navMenu.is(':visible')) {
+                    navMenu.fadeOut();
+                    videoContainer.fadeIn(); // 動画を再表示
                 } else {
-                    navMenu.style.display = 'block';
-                    videoContainer.style.display = 'none'; // 動画を非表示
+                    navMenu.fadeIn();
+                    videoContainer.fadeOut(); // 動画を非表示
+                }
+                $('#nav-menu ul').css({
+                    'text-align': 'center',
+                    'font-size': '2em'
+                });
+            }
+
+            // ウィンドウリサイズ時の処理
+            function checkWindowSize() {
+                if ($(window).width() <= 768) {
+                    $('#logo').off('click').on('click', toggleMenu); // クリックイベントをバインド
+                } else {
+                    $('#logo').off('click'); // クリックイベントを解除
                 }
             }
-        });
 
-        // モーダルのスクリプト
-        document.querySelectorAll('.video-wrapper').forEach(wrapper => {
-            wrapper.addEventListener('click', () => {
-                const url = wrapper.getAttribute('data-youtube-url');
-                document.getElementById('videoIframe').src = url;
-                document.getElementById('videoModal').style.display = 'flex';
-            });
-        });
+            $(window).resize(checkWindowSize).resize(); // 初期実行のためにリサイズイベントを発生
 
-        document.querySelector('.modal-close').addEventListener('click', () => {
-            document.getElementById('videoModal').style.display = 'none';
-            document.getElementById('videoIframe').src = ''; // 動画を停止
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === document.getElementById('videoModal')) {
-                document.getElementById('videoModal').style.display = 'none';
-                document.getElementById('videoIframe').src = ''; // 動画を停止
-            }
+            // スクロール禁止
+            $('body').css('overflow-x', 'hidden');
         });
     </script>
 </body>
